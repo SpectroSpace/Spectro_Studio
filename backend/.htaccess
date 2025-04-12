@@ -1,0 +1,5 @@
+# Protejează fișierul de credențiale
+<Files "spec_admin__db__credentials.php">
+    Order Allow,Deny
+    Deny from all
+</Files>
