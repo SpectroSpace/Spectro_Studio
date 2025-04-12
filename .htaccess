@@ -1,0 +1,18 @@
+# Fix MIME type issues
+<IfModule mod_mime.c>
+    AddType text/css .css
+    AddType application/javascript .js
+    AddType image/svg+xml .svg
+</IfModule>
+
+# Prevent directory listing
+Options -Indexes
+
+# Enable rewrites
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Redirect to non-www version
+    RewriteCond %{HTTP_HOST} ^www\.spectrostudio\.com [NC]
+    RewriteRule ^(.*)$ http://spectrostudio.com/$1 [L,R=301]
+</IfModule>
