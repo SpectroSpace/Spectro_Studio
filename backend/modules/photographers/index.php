@@ -76,21 +76,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             // Încarcă poza dacă există
             $profile_image = '';
             if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
-                $uploadDir = '../../uploads/photographers/';
+                // Folosim calea absolută către directorul uploads
+                $uploadBaseDir = $_SERVER['DOCUMENT_ROOT'] . '/uploads/photographers/';
+                $relativePathDB = '/uploads/photographers/';
+                
+                // Pentru dezvoltare locală, putem folosi o abordare alternativă
+                if (!file_exists($uploadBaseDir)) {
+                    // Folosim calea relativă pentru dezvoltare locală
+                    $uploadBaseDir = dirname(__FILE__) . '/../../../uploads/photographers/';
+                    $relativePathDB = '/uploads/photographers/';
+                }
                 
                 // Asigură existența directorului
-                if (!file_exists($uploadDir)) {
-                    mkdir($uploadDir, 0755, true);
+                if (!file_exists($uploadBaseDir)) {
+                    mkdir($uploadBaseDir, 0755, true);
                 }
                 
                 // Generează nume unic pentru fișier
                 $fileExtension = pathinfo($_FILES['profile_image']['name'], PATHINFO_EXTENSION);
                 $fileName = $slug . '-' . time() . '.' . $fileExtension;
-                $targetFile = $uploadDir . $fileName;
+                $targetFile = $uploadBaseDir . $fileName;
                 
                 // Procesează și salvează imaginea
                 if (move_uploaded_file($_FILES['profile_image']['tmp_name'], $targetFile)) {
-                    $profile_image = '/uploads/photographers/' . $fileName;
+                    $profile_image = $relativePathDB . $fileName;
+                    // Adăugăm log pentru debugging
+                    error_log("Imagine încărcată cu succes: " . $targetFile);
+                } else {
+                    error_log("Eroare la încărcarea imaginii: " . $targetFile . " - Error: " . $_FILES['profile_image']['error']);
                 }
             }
             
@@ -162,26 +175,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             // Încarcă poza nouă dacă există
             $profile_image = $_POST['existing_profile_image'] ?? '';
             if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
-                $uploadDir = '../../uploads/photographers/';
+                // Folosim calea absolută către directorul uploads
+                $uploadBaseDir = $_SERVER['DOCUMENT_ROOT'] . '/uploads/photographers/';
+                $relativePathDB = '/uploads/photographers/';
+                
+                // Pentru dezvoltare locală, putem folosi o abordare alternativă
+                if (!file_exists($uploadBaseDir)) {
+                    // Folosim calea relativă pentru dezvoltare locală
+                    $uploadBaseDir = dirname(__FILE__) . '/../../../uploads/photographers/';
+                    $relativePathDB = '/uploads/photographers/';
+                }
                 
                 // Asigură existența directorului
-                if (!file_exists($uploadDir)) {
-                    mkdir($uploadDir, 0755, true);
+                if (!file_exists($uploadBaseDir)) {
+                    mkdir($uploadBaseDir, 0755, true);
                 }
                 
                 // Generează nume unic pentru fișier
                 $fileExtension = pathinfo($_FILES['profile_image']['name'], PATHINFO_EXTENSION);
                 $fileName = $slug . '-' . time() . '.' . $fileExtension;
-                $targetFile = $uploadDir . $fileName;
+                $targetFile = $uploadBaseDir . $fileName;
                 
                 // Procesează și salvează imaginea nouă
                 if (move_uploaded_file($_FILES['profile_image']['tmp_name'], $targetFile)) {
                     // Șterge imaginea veche dacă există
-                    if (!empty($profile_image) && file_exists('../../' . $profile_image)) {
-                        unlink('../../' . $profile_image);
+                    if (!empty($profile_image) && file_exists($_SERVER['DOCUMENT_ROOT'] . $profile_image)) {
+                        unlink($_SERVER['DOCUMENT_ROOT'] . $profile_image);
                     }
                     
-                    $profile_image = '/uploads/photographers/' . $fileName;
+                    $profile_image = $relativePathDB . $fileName;
+                    // Adăugăm log pentru debugging
+                    error_log("Imagine încărcată cu succes: " . $targetFile);
+                } else {
+                    error_log("Eroare la încărcarea imaginii: " . $targetFile . " - Error: " . $_FILES['profile_image']['error']);
                 }
             }
             
@@ -252,8 +278,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             $stmt->execute([$photographer_id]);
             
             // Șterge și imaginea
-            if (!empty($profile_image) && file_exists('../../' . $profile_image)) {
-                unlink('../../' . $profile_image);
+            if (!empty($profile_image) && file_exists($_SERVER['DOCUMENT_ROOT'] . $profile_image)) {
+                unlink($_SERVER['DOCUMENT_ROOT'] . $profile_image);
             }
             
             // Setăm mesajul în sesiune
@@ -278,13 +304,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 // Obține lista de fotografi pentru tabel
 $photographers = [];
 try {
-    $stmt = $conn->query("SELECT * FROM photographers ORDER BY name");
-    $photographers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // SOLUȚIE DEFINITIVĂ PENTRU DUPLICARE
+    // 1. Obținem lista de ID-uri unice
+    $stmt = $conn->query("SELECT DISTINCT id FROM photographers ORDER BY id");
+    $photographer_ids = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    
+    // 2. Pentru fiecare ID, obținem doar un singur rând
+    $photographers = [];
+    foreach ($photographer_ids as $id) {
+        $stmt = $conn->prepare("SELECT * FROM photographers WHERE id = ? LIMIT 1");
+        $stmt->execute([$id]);
+        $photographer = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if ($photographer) {
+            $photographers[] = $photographer;
+        }
+    }
+    
+    // 3. Sortăm fotografii alfabetic după nume
+    usort($photographers, function($a, $b) {
+        return strcasecmp($a['name'], $b['name']);
+    });
+    
+    // Log pentru debugging
+    error_log("SOLUȚIE FINALĂ: Număr total de fotografi după deduplicare: " . count($photographers));
+    foreach ($photographers as $photographer) {
+        error_log("SOLUȚIE FINALĂ: Fotograf ID: " . $photographer['id'] . ", Nume: " . $photographer['name']);
+    }
     
     // Obține specializările pentru fotografi
     foreach ($photographers as &$photographer) {
         $stmtCats = $conn->prepare("
-            SELECT gc.id, gc.name 
+            SELECT DISTINCT gc.id, gc.name 
             FROM photographer_categories pc
             JOIN gallery_categories gc ON pc.category_id = gc.id
             WHERE pc.photographer_id = ?
@@ -295,6 +346,7 @@ try {
 } catch (PDOException $e) {
     $message = 'Eroare la obținerea listei de fotografi: ' . $e->getMessage();
     $messageType = 'error';
+    error_log("Eroare SQL în modulul photographer: " . $e->getMessage());
 }
 ?>
 
@@ -655,6 +707,11 @@ try {
 </style>
 
 <script>
+// Definim o funcție sigură pentru a face cereri HTTP
+const fetchAPI = function(url, options) {
+    return window.fetch(url, options || {});
+};
+
 document.addEventListener('DOMContentLoaded', function() {
     const photographerForm = document.getElementById('photographer-form-container');
     const toggleFormBtn = document.getElementById('toggle-photographer-form');
@@ -727,8 +784,8 @@ document.addEventListener('DOMContentLoaded', function() {
             formTitle.textContent = 'Editează Fotograf';
             deleteBtn.style.display = 'block';
             
-            // Obține datele fotografului prin fetch
-            fetch(`/backend/api/sp_API__photographers.php?action=get&id=${photographerId}`)
+            // Obține datele fotografului prin fetchAPI (funcția noastră sigură)
+            fetchAPI(`/backend/api/sp_API__photographers.php?action=get&id=${photographerId}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
@@ -818,5 +875,60 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('delete-photographer-name').textContent = photographerName;
         deleteModal.style.display = 'block';
     });
+
+    // SOLUȚIE DEFINITIVĂ PENTRU DUPLICARE VIZUALĂ:
+    // Această funcție se asigură că fiecare fotograf apare o singură dată în interfață
+    function removeDuplicateRows() {
+        const table = document.querySelector('.admin-table');
+        if (!table) return;
+        
+        const tbody = table.querySelector('tbody');
+        if (!tbody) return;
+        
+        const rows = tbody.querySelectorAll('tr');
+        const seen = new Set();
+        
+        rows.forEach(row => {
+            const idCell = row.querySelector('td:first-child');
+            if (!idCell) return;
+            
+            const photographerId = idCell.textContent.trim();
+            
+            if (seen.has(photographerId)) {
+                // Acest fotograf a fost deja afișat, eliminăm rândul duplicat
+                row.remove();
+                console.log(`Eliminat rând duplicat pentru fotograful cu ID ${photographerId}`);
+            } else {
+                // Marcăm acest ID ca fiind deja afișat
+                seen.add(photographerId);
+            }
+        });
+        
+        console.log(`Total fotografi unici afișați: ${seen.size}`);
+    }
+    
+    // Rulăm funcția după ce tot DOM-ul s-a încărcat
+    setTimeout(removeDuplicateRows, 100);
+    
+    // Funcție pentru ascunderea automată a mesajelor de alertă după 3 secunde
+    const alertMessages = document.querySelectorAll('.alert');
+    if (alertMessages.length > 0) {
+        setTimeout(function() {
+            alertMessages.forEach(function(alert) {
+                alert.style.opacity = '1';
+                
+                // Animație fade-out
+                let opacity = 1;
+                const fadeOut = setInterval(function() {
+                    if (opacity <= 0.1) {
+                        clearInterval(fadeOut);
+                        alert.style.display = 'none';
+                    }
+                    opacity -= 0.1;
+                    alert.style.opacity = opacity;
+                }, 50);
+            });
+        }, 3000);
+    }
 });
 </script>

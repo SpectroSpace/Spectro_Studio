@@ -57,9 +57,11 @@ try {
 // Verificăm dacă avem acces direct sau este inclusă în alt fișier
 $is_included = (basename($_SERVER['SCRIPT_FILENAME']) !== basename(__FILE__));
 
-// Dacă este accesat direct, afișăm întreaga pagină
+// Dacă este accesat direct, redirecționăm către pagina principală de administrare
+// în loc să includem de mai multe ori modulele
 if (!$is_included) {
-    include 'spec_admin__index.php';
+    header('Location: spec_admin__index.php');
+    exit;
 }
 
 // Altfel, doar returnăm variabilele pentru a fi folosite în alte fișiere

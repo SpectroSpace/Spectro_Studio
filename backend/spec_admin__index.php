@@ -94,6 +94,12 @@ $_SESSION['last_activity'] = time();
                 </button>
             </div>
             
+            <!-- Butoane utilități -->
+            <div class="utility-buttons-container">
+                <button id="force-refresh" class="btn btn-filter">REÎMPROSPĂTEAZĂ</button>
+                <button id="clear-cache" class="btn btn-reset">CURĂȚĂ CACHE</button>
+            </div>
+            
             <!-- Dashboard Tab -->
             <section id="dashboard" class="tab-content active">
                 <div class="section-header">
@@ -371,7 +377,205 @@ $_SESSION['last_activity'] = time();
                     document.getElementById(this.dataset.tab).classList.add('active');
                 });
             });
+            
+            // =========== BUTOANE UTILITĂȚI ===========
+            console.log("Inițializez butoanele de utilități");
+            
+            // Butoane utilitare
+            const forceRefreshBtn = document.getElementById('force-refresh');
+            const clearCacheBtn = document.getElementById('clear-cache');
+            
+            if (forceRefreshBtn) {
+                console.log("Buton de refresh găsit, atașez eveniment");
+                
+                // Eveniment pentru refresh forțat
+                forceRefreshBtn.addEventListener('click', function() {
+                    console.log("Buton de refresh apăsat");
+                    
+                    // Afișează un mesaj temporar
+                    showMessage('Reîmprospătare forțată în curs...');
+                    
+                    // Forțează reîncărcarea paginii ignorând cache-ul
+                    setTimeout(function() {
+                        window.location.reload(true);
+                    }, 500);
+                });
+            } else {
+                console.error("Butonul de refresh nu a fost găsit în DOM!");
+            }
+            
+            if (clearCacheBtn) {
+                console.log("Buton de curățare cache găsit, atașez eveniment");
+                
+                // Eveniment pentru curățare cache
+                clearCacheBtn.addEventListener('click', function() {
+                    console.log("Buton de curățare cache apăsat");
+                    
+                    // Afișează un mesaj temporar
+                    showMessage('Curățare cache în curs...');
+                    
+                    // Curăță cache-ul localStorage și sessionStorage
+                    localStorage.clear();
+                    sessionStorage.clear();
+                    
+                    // Curăță cache-ul pentru fișierele statice folosind un tip de versioning
+                    const timestamp = new Date().getTime();
+                    const currentUrl = window.location.href.split('?')[0];
+                    
+                    // Reîncarcă pagina cu un parametru timestamp pentru a forța reîncărcarea resurselor
+                    setTimeout(function() {
+                        window.location.href = currentUrl + '?cache_bust=' + timestamp;
+                    }, 500);
+                });
+            } else {
+                console.error("Butonul de curățare cache nu a fost găsit în DOM!");
+            }
+            
+            // Funcție pentru afișarea mesajelor temporare
+            function showMessage(text) {
+                // Crează elementul pentru mesaj
+                const message = document.createElement('div');
+                message.className = 'alert alert-info';
+                message.style.position = 'fixed';
+                message.style.top = '80px';  // Poziționat mai jos pentru a fi vizibil
+                message.style.right = '20px';
+                message.style.zIndex = '9999';
+                message.style.padding = '15px 20px';
+                message.style.borderRadius = '6px';
+                message.style.boxShadow = '0 4px 12px rgba(0,0,0,0.4)';
+                message.style.animation = 'fadeIn 0.3s ease';
+                message.style.maxWidth = '300px';
+                message.innerHTML = text;
+                
+                // Adaugă mesajul în DOM
+                document.body.appendChild(message);
+                
+                // Adaugă un efect de fadeOut după un timp
+                setTimeout(function() {
+                    message.style.transition = 'opacity 0.5s ease';
+                    message.style.opacity = '0';
+                    setTimeout(function() {
+                        if (message.parentNode) {
+                            message.parentNode.removeChild(message);
+                        }
+                    }, 500);
+                }, 2500);
+            }
+            
+            // =========== DEDUPLICARE RÂNDURI ===========
+            // Funcție îmbunătățită pentru eliminarea rândurilor duplicate
+            function removeDuplicateRows() {
+                console.log("Verificare pentru rânduri duplicate...");
+                
+                const tables = document.querySelectorAll('.admin-table');
+                if (!tables || tables.length === 0) {
+                    console.log("Nu am găsit tabele pentru deduplicare.");
+                    return;
+                }
+                
+                tables.forEach((table, tableIndex) => {
+                    const tbody = table.querySelector('tbody');
+                    if (!tbody) return;
+                    
+                    const rows = tbody.querySelectorAll('tr');
+                    if (!rows || rows.length === 0) {
+                        console.log(`Tabelul #${tableIndex} nu are rânduri.`);
+                        return;
+                    }
+                    
+                    console.log(`Procesez ${rows.length} rânduri din tabelul #${tableIndex}`);
+                    
+                    const seen = new Set();
+                    let duplicatesRemoved = 0;
+                    
+                    rows.forEach(row => {
+                        const idCell = row.querySelector('td:first-child');
+                        if (!idCell) return;
+                        
+                        const itemId = idCell.textContent.trim();
+                        
+                        if (seen.has(itemId)) {
+                            // Acest element a fost deja afișat, eliminăm rândul duplicat
+                            row.remove();
+                            duplicatesRemoved++;
+                            console.log(`Eliminat rând duplicat pentru ID ${itemId} în tabelul #${tableIndex}`);
+                        } else {
+                            // Marcăm acest ID ca fiind deja afișat
+                            seen.add(itemId);
+                        }
+                    });
+                    
+                    console.log(`Total elemente unice în tabelul #${tableIndex}: ${seen.size}, duplicate eliminate: ${duplicatesRemoved}`);
+                });
+            }
+            
+            // Rulăm funcția de deduplicare după încărcarea completă a paginii
+            setTimeout(removeDuplicateRows, 100); // Prima execuție
+            setTimeout(removeDuplicateRows, 500); // A doua execuție după încărcarea completă
+            setTimeout(removeDuplicateRows, 1000); // A treia execuție pentru cazuri mai lente
+            
+            // Rulează funcția și când se schimbă tabul
+            tabLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    // Așteptăm puțin pentru a permite tabului să se afișeze complet
+                    setTimeout(removeDuplicateRows, 100);
+                    setTimeout(removeDuplicateRows, 500);
+                });
+            });
         });
     </script>
+    <!-- Stiluri CSS pentru butoane utilități -->
+    <style>
+    .utility-buttons-container {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        gap: 10px;
+        z-index: 100;
+    }
+
+    .btn-filter {
+        background-color: #ffc107; /* Galben */
+        color: #212529;
+        border: none;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        padding: 8px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-filter:hover {
+        background-color: #e0a800;
+    }
+
+    .btn-reset {
+        background-color: #dc3545; /* Roșu */
+        color: #fff;
+        border: none;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        padding: 8px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-reset:hover {
+        background-color: #c82333;
+    }
+
+    @media (max-width: 768px) {
+        .utility-buttons-container {
+            position: static;
+            margin: 20px 0;
+            justify-content: flex-end;
+        }
+    }
+    </style>
 </body>
 </html>

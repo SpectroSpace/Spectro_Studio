@@ -50,10 +50,23 @@ try {
     switch ($action) {
         case 'list':
             // Obține lista de fotografi
-            $query = "SELECT * FROM photographers ORDER BY name";
+            $query = "SELECT DISTINCT * FROM photographers ORDER BY name";
             $stmt = $conn->prepare($query);
             $stmt->execute();
             $photographers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            // Deduplicare folosind un array asociativ indexat după ID
+            $uniquePhotographers = [];
+            foreach ($photographers as $photographer) {
+                $uniquePhotographers[$photographer['id']] = $photographer;
+            }
+            $photographers = array_values($uniquePhotographers);
+            
+            // Log pentru debugging
+            error_log("API: Număr total de fotografi după deduplicare: " . count($photographers));
+            foreach ($photographers as $photographer) {
+                error_log("API: Fotograf ID: " . $photographer['id'] . ", Nume: " . $photographer['name']);
+            }
             
             // Obține specializările pentru fiecare fotograf
             foreach ($photographers as &$photographer) {

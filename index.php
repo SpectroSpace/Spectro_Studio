@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 // filepath: f:\SITE SPECTRO STUDIO\index.php
 // Include modulul de mentenanță

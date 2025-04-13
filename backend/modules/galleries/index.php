@@ -81,7 +81,7 @@ try {
             <div class="form-group">
                 <label>
                     <input type="checkbox" id="is_featured" name="is_featured" value="1">
-                    Afișează în secțiunea Featured
+                    Afișează în Featured
                 </label>
             </div>
             
