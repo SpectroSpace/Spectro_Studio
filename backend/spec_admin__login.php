@@ -1,5 +1,5 @@
 <?php
-// filepath: f:\SITE SPECTRO STUDIO\backend\spec_admin__login.php
+// filepath: C:\xampp\htdocs\Spectro_Studio\backend\spec_admin__login.php
 // Inițializarea sesiunii
 session_start();
 
@@ -39,8 +39,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Salvăm sesiunea înainte de redirecționare
         session_write_close();
         
-        // Redirecționare către dashboard
-        header('Location: spec_admin__index.php');
+        // Redirect with JavaScript and a small delay to prevent "message port closed" error
+        echo '<script>
+            setTimeout(function() {
+                window.location.href = "spec_admin__index.php";
+            }, 100);
+        </script>';
         exit;
     } else {
         // Autentificare eșuată
@@ -70,12 +74,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <form method="POST">
                 <div class="form-group">
                     <label for="username">Utilizator:</label>
-                    <input type="text" id="username" name="username" required autofocus>
+                    <input type="text" id="username" name="username" required autofocus autocomplete="username">
                 </div>
                 
                 <div class="form-group">
                     <label for="password">Parolă:</label>
-                    <input type="password" id="password" name="password" required>
+                    <input type="password" id="password" name="password" required autocomplete="current-password">
                 </div>
                 
                 <div class="form-actions">

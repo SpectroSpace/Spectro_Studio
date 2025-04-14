@@ -38,7 +38,7 @@ try {
 <div id="image-message" class="alert" style="display: none;"></div>
 
 <!-- Formular încărcare fotografii -->
-<div id="upload-container" style="display: none;" class="form-gradient-container">
+<div id="photos-form-container" style="display: none;" class="form-gradient-container">
     <div class="admin-form">
         <div class="card">
             <div class="card-header">
@@ -593,24 +593,24 @@ document.addEventListener('DOMContentLoaded', function() {
     const clearSelectionBtn = document.getElementById('clear-selection');
     const selectedCountElement = document.getElementById('selected-count');
     const uploadForm = document.getElementById('upload-form');
-    const uploadContainer = document.getElementById('upload-container');
+    const photosFormContainer = document.getElementById('photos-form-container');
     const toggleUploadBtn = document.getElementById('toggle-upload-form');
     const cancelUploadBtn = document.getElementById('cancel-upload');
     
     // Toggle formular încărcare
     toggleUploadBtn.addEventListener('click', function() {
-        if (uploadContainer.style.display === 'none' || !uploadContainer.style.display) {
-            uploadContainer.style.display = 'block';
+        if (photosFormContainer.style.display === 'none' || !photosFormContainer.style.display) {
+            photosFormContainer.style.display = 'block';
             this.textContent = 'Ascunde formularul';
         } else {
-            uploadContainer.style.display = 'none';
+            photosFormContainer.style.display = 'none';
             this.textContent = 'Încarcă fotografii noi';
         }
     });
     
     // Anulare încărcare
     cancelUploadBtn.addEventListener('click', function() {
-        uploadContainer.style.display = 'none';
+        photosFormContainer.style.display = 'none';
         toggleUploadBtn.textContent = 'Încarcă fotografii noi';
         clearFiles();
     });
@@ -700,7 +700,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (data.success) {
                 showMessage(`${data.message} S-au încărcat ${data.uploaded_count} fotografii.`, 'success');
                 clearFiles();
-                uploadContainer.style.display = 'none';
+                photosFormContainer.style.display = 'none';
                 toggleUploadBtn.textContent = 'Încarcă fotografii noi';
                 loadPhotos(); // Reîncarcă lista de fotografii
             } else {

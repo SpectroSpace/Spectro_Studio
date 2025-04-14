@@ -66,3 +66,14 @@ if (!$is_included) {
 
 // Altfel, doar returnăm variabilele pentru a fi folosite în alte fișiere
 ?>
+
+<li class="<?php echo $current_tab == 'settings_maintenance' ? 'active' : ''; ?>">
+    <a href="?tab=settings_maintenance">
+        <i class="bi bi-tools"></i> Mentenanță Site
+    </a>
+</li>
+<li class="<?php echo $current_tab == 'settings_optimization' ? 'active' : ''; ?>">
+    <a href="?tab=settings_optimization">
+        <i class="bi bi-speedometer"></i> Optimizare Site
+    </a>
+</li>

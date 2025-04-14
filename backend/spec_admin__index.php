@@ -60,8 +60,8 @@ $_SESSION['last_activity'] = time();
             <nav>
                 <ul>
                     <li><a href="#dashboard" class="tab-link active" data-tab="dashboard">Dashboard</a></li>
-                    <li><a href="#galleries" class="tab-link" data-tab="galleries">Galerii</a></li>
                     <li><a href="#photographers" class="tab-link" data-tab="photographers">Fotografi</a></li>
+                    <li><a href="#galleries" class="tab-link" data-tab="galleries">Galerii</a></li>
                     <li><a href="#photos" class="tab-link" data-tab="photos">Fotografii</a></li>
                     <li><a href="#settings" class="tab-link" data-tab="settings">Setări</a></li>
                 </ul>

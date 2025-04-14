@@ -39,6 +39,162 @@ $countries = [
     'Other' => 'Altă țară'
 ];
 
+// Dicționar cu orașele pentru fiecare țară
+$cities_by_country = [
+    'Romania' => [
+        'Bucuresti' => 'București',
+        'Cluj-Napoca' => 'Cluj-Napoca',
+        'Timisoara' => 'Timișoara',
+        'Iasi' => 'Iași',
+        'Constanta' => 'Constanța',
+        'Craiova' => 'Craiova',
+        'Brasov' => 'Brașov',
+        'Galati' => 'Galați',
+        'Oradea' => 'Oradea',
+        'Ploiesti' => 'Ploiești',
+        'Braila' => 'Brăila',
+        'Arad' => 'Arad',
+        'Pitesti' => 'Pitești',
+        'Sibiu' => 'Sibiu',
+        'Bacau' => 'Bacău',
+        'Targu-Mures' => 'Târgu Mureș',
+        'Baia-Mare' => 'Baia Mare',
+        'Buzau' => 'Buzău',
+        'Satu-Mare' => 'Satu Mare',
+        'Botosani' => 'Botoșani',
+        'Suceava' => 'Suceava',
+        'Piatra-Neamt' => 'Piatra Neamț',
+        'Drobeta-Turnu-Severin' => 'Drobeta-Turnu Severin',
+        'Alta-localitate' => 'Altă localitate'
+    ],
+    'Moldova' => [
+        'Chisinau' => 'Chișinău',
+        'Balti' => 'Bălți',
+        'Tiraspol' => 'Tiraspol',
+        'Bender' => 'Bender',
+        'Cahul' => 'Cahul',
+        'Ungheni' => 'Ungheni',
+        'Soroca' => 'Soroca',
+        'Orhei' => 'Orhei',
+        'Alta-localitate' => 'Altă localitate'
+    ],
+    'Bulgaria' => [
+        'Sofia' => 'Sofia',
+        'Plovdiv' => 'Plovdiv',
+        'Varna' => 'Varna',
+        'Burgas' => 'Burgas',
+        'Ruse' => 'Ruse',
+        'Stara-Zagora' => 'Stara Zagora',
+        'Pleven' => 'Pleven',
+        'Alta-localitate' => 'Altă localitate'
+    ],
+    'Ukraine' => [
+        'Kiev' => 'Kiev',
+        'Harkov' => 'Harkov',
+        'Odesa' => 'Odesa',
+        'Dnipro' => 'Dnipro',
+        'Donetsk' => 'Donetsk',
+        'Lviv' => 'Lviv',
+        'Alta-localitate' => 'Altă localitate'
+    ],
+    'Hungary' => [
+        'Budapesta' => 'Budapesta',
+        'Debrecen' => 'Debrecen',
+        'Szeged' => 'Szeged',
+        'Miskolc' => 'Miskolc',
+        'Pecs' => 'Pecs',
+        'Alta-localitate' => 'Altă localitate'
+    ],
+    'Serbia' => [
+        'Belgrad' => 'Belgrad',
+        'Novi-Sad' => 'Novi Sad',
+        'Nis' => 'Niš',
+        'Alta-localitate' => 'Altă localitate'
+    ],
+    'Slovakia' => [
+        'Bratislava' => 'Bratislava',
+        'Kosice' => 'Košice',
+        'Presov' => 'Prešov',
+        'Alta-localitate' => 'Altă localitate'
+    ],
+    'Italy' => [
+        'Roma' => 'Roma',
+        'Milano' => 'Milano',
+        'Napoli' => 'Napoli',
+        'Torino' => 'Torino',
+        'Palermo' => 'Palermo',
+        'Bologna' => 'Bologna',
+        'Firenze' => 'Florența',
+        'Genova' => 'Genova',
+        'Alta-localitate' => 'Altă localitate'
+    ],
+    'Spain' => [
+        'Madrid' => 'Madrid',
+        'Barcelona' => 'Barcelona',
+        'Valencia' => 'Valencia',
+        'Sevilla' => 'Sevilia',
+        'Zaragoza' => 'Zaragoza',
+        'Malaga' => 'Málaga',
+        'Alta-localitate' => 'Altă localitate'
+    ],
+    'France' => [
+        'Paris' => 'Paris',
+        'Marseille' => 'Marsilia',
+        'Lyon' => 'Lyon',
+        'Toulouse' => 'Toulouse',
+        'Nice' => 'Nisa',
+        'Nantes' => 'Nantes',
+        'Strasbourg' => 'Strasbourg',
+        'Alta-localitate' => 'Altă localitate'
+    ],
+    'UK' => [
+        'London' => 'Londra',
+        'Birmingham' => 'Birmingham',
+        'Manchester' => 'Manchester',
+        'Glasgow' => 'Glasgow',
+        'Liverpool' => 'Liverpool',
+        'Edinburgh' => 'Edinburgh',
+        'Alta-localitate' => 'Altă localitate'
+    ],
+    'Germany' => [
+        'Berlin' => 'Berlin',
+        'Hamburg' => 'Hamburg',
+        'Munchen' => 'München',
+        'Koln' => 'Köln',
+        'Frankfurt' => 'Frankfurt',
+        'Stuttgart' => 'Stuttgart',
+        'Dusseldorf' => 'Düsseldorf',
+        'Dortmund' => 'Dortmund',
+        'Alta-localitate' => 'Altă localitate'
+    ],
+    'USA' => [
+        'New-York' => 'New York',
+        'Los-Angeles' => 'Los Angeles',
+        'Chicago' => 'Chicago',
+        'Houston' => 'Houston',
+        'Phoenix' => 'Phoenix',
+        'Philadelphia' => 'Philadelphia',
+        'San-Antonio' => 'San Antonio',
+        'San-Diego' => 'San Diego',
+        'Dallas' => 'Dallas',
+        'San-Francisco' => 'San Francisco',
+        'Alta-localitate' => 'Altă localitate'
+    ],
+    'Canada' => [
+        'Toronto' => 'Toronto',
+        'Montreal' => 'Montreal',
+        'Vancouver' => 'Vancouver',
+        'Calgary' => 'Calgary',
+        'Edmonton' => 'Edmonton',
+        'Ottawa' => 'Ottawa',
+        'Quebec' => 'Quebec',
+        'Alta-localitate' => 'Altă localitate'
+    ],
+    'Other' => [
+        'Alta-localitate' => 'Altă localitate'
+    ]
+];
+
 // Verificăm dacă avem un mesaj în sesiune și îl afișăm
 $message = '';
 $messageType = '';
@@ -390,8 +546,8 @@ try {
             
             <div class="form-row">
                 <div class="form-group form-group-half">
-                    <label for="country">Țara</label>
-                    <select id="country" name="country" class="form-control">
+                    <label for="country">Țara <span class="required">*</span></label>
+                    <select id="country" name="country" class="form-control" required>
                         <option value="">-- Selectează țara --</option>
                         <?php foreach ($countries as $code => $countryName): ?>
                             <option value="<?php echo $code; ?>"><?php echo $countryName; ?></option>
@@ -400,33 +556,38 @@ try {
                 </div>
                 
                 <div class="form-group form-group-half">
-                    <label for="city">Orașul</label>
-                    <input type="text" id="city" name="city" class="form-control">
+                    <label for="city">Orașul <span class="required">*</span></label>
+                    <select id="city" name="city" class="form-control" required>
+                        <option value="">-- Selectează orașul --</option>
+                        <!-- Orașele vor fi încărcate dinamic cu JavaScript -->
+                    </select>
+                    <input type="text" id="custom_city" name="custom_city" class="form-control" style="display: none; margin-top: 5px;" placeholder="Introduceți numele orașului">
                 </div>
             </div>
             
             <div class="form-group">
-                <label for="profile_image">Imagine profil</label>
-                <input type="file" id="profile_image" name="profile_image" class="form-control" accept="image/*">
+                <label for="profile_image">Imagine profil <span class="required">*</span></label>
+                <input type="file" id="profile_image" name="profile_image" class="form-control" accept="image/*" required>
                 <div id="profile-image-preview" class="img-preview" style="display: none;">
                     <img id="profile-image-preview-img" src="" alt="Preview" style="max-width: 200px;">
                 </div>
             </div>
             
             <div class="form-group">
-                <label for="specialization">Specializări</label>
+                <label for="specialization">Specializări <span class="required">*</span></label>
                 <div class="checkbox-group specialization-checkboxes">
                     <?php if (empty($categories)): ?>
                         <p class="form-text text-warning">Nu există categorii disponibile.</p>
                     <?php else: ?>
                         <?php foreach ($categories as $category): ?>
                             <label class="checkbox-inline">
-                                <input type="checkbox" name="specialization[]" value="<?php echo $category['id']; ?>">
+                                <input type="checkbox" name="specialization[]" value="<?php echo $category['id']; ?>" class="specialization-checkbox">
                                 <?php echo htmlspecialchars($category['name']); ?>
                             </label>
                         <?php endforeach; ?>
                     <?php endif; ?>
                 </div>
+                <div id="specialization-error" class="error-message" style="display: none; color: #F44336;">Selectați cel puțin o specializare.</div>
             </div>
             
             <div class="form-row">
@@ -436,32 +597,20 @@ try {
                 </div>
                 
                 <div class="form-group form-group-half">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" class="form-control">
+                    <label for="email">Email <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" class="form-control" required>
                 </div>
             </div>
             
             <div class="form-row">
                 <div class="form-group form-group-half">
-                    <label for="phone">Telefon</label>
-                    <input type="text" id="phone" name="phone" class="form-control">
+                    <label for="phone">Telefon <span class="required">*</span></label>
+                    <input type="text" id="phone" name="phone" class="form-control" required>
                 </div>
                 
                 <div class="form-group form-group-half">
                     <label for="website">Website</label>
                     <input type="text" id="website" name="website" class="form-control">
-                </div>
-            </div>
-            
-            <div class="form-row">
-                <div class="form-group form-group-half">
-                    <label for="facebook">Facebook</label>
-                    <input type="text" id="facebook" name="facebook" class="form-control">
-                </div>
-                
-                <div class="form-group form-group-half">
-                    <label for="instagram">Instagram</label>
-                    <input type="text" id="instagram" name="instagram" class="form-control">
                 </div>
             </div>
             
@@ -720,6 +869,290 @@ document.addEventListener('DOMContentLoaded', function() {
     const formTitle = document.getElementById('form-title');
     const form = document.getElementById('photographer-form');
     
+    // Definirea dicționarului de orașe pentru fiecare țară
+    const citiesByCountry = {
+        'Romania': {
+            'Bucuresti': 'București',
+            'Cluj-Napoca': 'Cluj-Napoca',
+            'Timisoara': 'Timișoara',
+            'Iasi': 'Iași',
+            'Constanta': 'Constanța',
+            'Craiova': 'Craiova',
+            'Brasov': 'Brașov',
+            'Galati': 'Galați',
+            'Oradea': 'Oradea',
+            'Ploiesti': 'Ploiești',
+            'Braila': 'Brăila',
+            'Arad': 'Arad',
+            'Pitesti': 'Pitești',
+            'Sibiu': 'Sibiu',
+            'Bacau': 'Bacău',
+            'Targu-Mures': 'Târgu Mureș',
+            'Baia-Mare': 'Baia Mare',
+            'Buzau': 'Buzău',
+            'Satu-Mare': 'Satu Mare',
+            'Botosani': 'Botoșani',
+            'Suceava': 'Suceava',
+            'Piatra-Neamt': 'Piatra Neamț',
+            'Drobeta-Turnu-Severin': 'Drobeta-Turnu Severin',
+            'Alta-localitate': 'Altă localitate'
+        },
+        'Moldova': {
+            'Chisinau': 'Chișinău',
+            'Balti': 'Bălți',
+            'Tiraspol': 'Tiraspol',
+            'Bender': 'Bender',
+            'Cahul': 'Cahul',
+            'Ungheni': 'Ungheni',
+            'Soroca': 'Soroca',
+            'Orhei': 'Orhei',
+            'Alta-localitate': 'Altă localitate'
+        },
+        'Bulgaria': {
+            'Sofia': 'Sofia',
+            'Plovdiv': 'Plovdiv',
+            'Varna': 'Varna',
+            'Burgas': 'Burgas',
+            'Ruse': 'Ruse',
+            'Stara-Zagora': 'Stara Zagora',
+            'Pleven': 'Pleven',
+            'Alta-localitate': 'Altă localitate'
+        },
+        'Ukraine': {
+            'Kiev': 'Kiev',
+            'Harkov': 'Harkov',
+            'Odesa': 'Odesa',
+            'Dnipro': 'Dnipro',
+            'Donetsk': 'Donetsk',
+            'Lviv': 'Lviv',
+            'Alta-localitate': 'Altă localitate'
+        },
+        'Hungary': {
+            'Budapesta': 'Budapesta',
+            'Debrecen': 'Debrecen',
+            'Szeged': 'Szeged',
+            'Miskolc': 'Miskolc',
+            'Pecs': 'Pecs',
+            'Alta-localitate': 'Altă localitate'
+        },
+        'Serbia': {
+            'Belgrad': 'Belgrad',
+            'Novi-Sad': 'Novi Sad',
+            'Nis': 'Niš',
+            'Alta-localitate': 'Altă localitate'
+        },
+        'Slovakia': {
+            'Bratislava': 'Bratislava',
+            'Kosice': 'Košice',
+            'Presov': 'Prešov',
+            'Alta-localitate': 'Altă localitate'
+        },
+        'Italy': {
+            'Roma': 'Roma',
+            'Milano': 'Milano',
+            'Napoli': 'Napoli',
+            'Torino': 'Torino',
+            'Palermo': 'Palermo',
+            'Bologna': 'Bologna',
+            'Firenze': 'Florența',
+            'Genova': 'Genova',
+            'Alta-localitate': 'Altă localitate'
+        },
+        'Spain': {
+            'Madrid': 'Madrid',
+            'Barcelona': 'Barcelona',
+            'Valencia': 'Valencia',
+            'Sevilla': 'Sevilia',
+            'Zaragoza': 'Zaragoza',
+            'Malaga': 'Málaga',
+            'Alta-localitate': 'Altă localitate'
+        },
+        'France': {
+            'Paris': 'Paris',
+            'Marseille': 'Marsilia',
+            'Lyon': 'Lyon',
+            'Toulouse': 'Toulouse',
+            'Nice': 'Nisa',
+            'Nantes': 'Nantes',
+            'Strasbourg': 'Strasbourg',
+            'Alta-localitate': 'Altă localitate'
+        },
+        'UK': {
+            'London': 'Londra',
+            'Birmingham': 'Birmingham',
+            'Manchester': 'Manchester',
+            'Glasgow': 'Glasgow',
+            'Liverpool': 'Liverpool',
+            'Edinburgh': 'Edinburgh',
+            'Alta-localitate': 'Altă localitate'
+        },
+        'Germany': {
+            'Berlin': 'Berlin',
+            'Hamburg': 'Hamburg',
+            'Munchen': 'München',
+            'Koln': 'Köln',
+            'Frankfurt': 'Frankfurt',
+            'Stuttgart': 'Stuttgart',
+            'Dusseldorf': 'Düsseldorf',
+            'Dortmund': 'Dortmund',
+            'Alta-localitate': 'Altă localitate'
+        },
+        'USA': {
+            'New-York': 'New York',
+            'Los-Angeles': 'Los Angeles',
+            'Chicago': 'Chicago',
+            'Houston': 'Houston',
+            'Phoenix': 'Phoenix',
+            'Philadelphia': 'Philadelphia',
+            'San-Antonio': 'San Antonio',
+            'San-Diego': 'San Diego',
+            'Dallas': 'Dallas',
+            'San-Francisco': 'San Francisco',
+            'Alta-localitate': 'Altă localitate'
+        },
+        'Canada': {
+            'Toronto': 'Toronto',
+            'Montreal': 'Montreal',
+            'Vancouver': 'Vancouver',
+            'Calgary': 'Calgary',
+            'Edmonton': 'Edmonton',
+            'Ottawa': 'Ottawa',
+            'Quebec': 'Quebec',
+            'Alta-localitate': 'Altă localitate'
+        },
+        'Other': {
+            'Alta-localitate': 'Altă localitate'
+        }
+    };
+    
+    // Funcție pentru actualizarea listei de orașe în funcție de țara selectată
+    function updateCityList() {
+        const countrySelector = document.getElementById('country');
+        const citySelector = document.getElementById('city');
+        const customCityInput = document.getElementById('custom_city');
+        const selectedCountry = countrySelector.value;
+        const previouslySelectedCity = citySelector.value;
+        
+        // Golim lista actuală de orașe
+        citySelector.innerHTML = '<option value="">-- Selectează orașul --</option>';
+        
+        // Dacă nu a fost selectată o țară, nu facem nimic
+        if (!selectedCountry) {
+            return;
+        }
+        
+        // Obținem lista de orașe pentru țara selectată
+        const cities = citiesByCountry[selectedCountry] || { 'Alta-localitate': 'Altă localitate' };
+        
+        // Adăugăm orașele la dropdown
+        for (const [value, label] of Object.entries(cities)) {
+            const option = document.createElement('option');
+            option.value = value;
+            option.textContent = label;
+            citySelector.appendChild(option);
+        }
+        
+        // Încercăm să restabilim selecția anterioară sau să selectăm "Altă localitate" pentru alte orașe
+        if (previouslySelectedCity && Object.keys(cities).includes(previouslySelectedCity)) {
+            citySelector.value = previouslySelectedCity;
+        } else if (previouslySelectedCity) {
+            citySelector.value = 'Alta-localitate';
+            customCityInput.value = previouslySelectedCity;
+            customCityInput.style.display = 'block';
+        } else {
+            customCityInput.style.display = 'none';
+        }
+    }
+    
+    // Handler pentru managementul câmpului de "Altă localitate"
+    function handleCustomCity() {
+        const citySelector = document.getElementById('city');
+        const customCityInput = document.getElementById('custom_city');
+        
+        if (citySelector.value === 'Alta-localitate') {
+            customCityInput.style.display = 'block';
+            customCityInput.focus();
+        } else {
+            customCityInput.style.display = 'none';
+        }
+    }
+    
+    // Adăugăm evenimentele pentru selecție
+    document.getElementById('country').addEventListener('change', function() {
+        updateCityList();
+        handleCustomCity();
+    });
+    
+    document.getElementById('city').addEventListener('change', handleCustomCity);
+    
+    // Inițializăm lista de orașe la încărcarea paginii
+    updateCityList();
+    
+    // Modificăm validarea formularului pentru a gestiona câmpul de "Altă localitate"
+    form.addEventListener('submit', function(e) {
+        const citySelector = document.getElementById('city');
+        const customCityInput = document.getElementById('custom_city');
+        
+        // Dacă utilizatorul a selectat "Altă localitate", dar nu a introdus un oraș, oprim trimiterea
+        if (citySelector.value === 'Alta-localitate' && !customCityInput.value.trim()) {
+            e.preventDefault();
+            alert('Vă rugăm să introduceți numele orașului.');
+            customCityInput.focus();
+            return false;
+        }
+        
+        // Dacă a fost introdusă o localitate personalizată, o utilizăm în loc de selecția din dropdown
+        if (citySelector.value === 'Alta-localitate' && customCityInput.value.trim()) {
+            // Creăm un câmp ascuns pentru a transmite orașul personalizat
+            const hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = 'city';
+            hiddenInput.value = customCityInput.value.trim();
+            
+            // Înlocuim valoarea din dropdown
+            citySelector.name = 'city_selection';  // Schimbăm numele pentru a evita conflicte
+            
+            // Adăugăm câmpul ascuns la formular
+            form.appendChild(hiddenInput);
+        }
+        
+        // Verificăm dacă există cel puțin o specializare selectată
+        const specializationCheckboxes = document.querySelectorAll('.specialization-checkbox:checked');
+        const specializationError = document.getElementById('specialization-error');
+        
+        if (specializationCheckboxes.length === 0) {
+            e.preventDefault(); // Oprim trimiterea formularului
+            specializationError.style.display = 'block';
+            
+            // Scroll către mesajul de eroare
+            specializationError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            return false;
+        } else {
+            specializationError.style.display = 'none';
+        }
+        
+        // Verificăm imaginea de profil la adăugare nouă
+        const action = document.getElementById('photographer-action').value;
+        const profileImage = document.getElementById('profile_image');
+        const existingImage = document.getElementById('existing-profile-image').value;
+        
+        if (action === 'add' && profileImage.files.length === 0) {
+            e.preventDefault(); // Oprim trimiterea formularului
+            alert('Vă rugăm să selectați o imagine de profil.');
+            profileImage.focus();
+            return false;
+        } else if (action === 'edit' && profileImage.files.length === 0 && existingImage === '') {
+            e.preventDefault(); // Oprim trimiterea formularului
+            alert('Vă rugăm să selectați o imagine de profil.');
+            profileImage.focus();
+            return false;
+        }
+        
+        // Toate validările au trecut, formularul poate fi trimis
+        return true;
+    });
+    
     // Funcție pentru resetarea formularului
     function resetForm() {
         form.reset();
@@ -727,12 +1160,17 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('photographer-id').value = '';
         document.getElementById('existing-profile-image').value = '';
         document.getElementById('profile-image-preview').style.display = 'none';
+        document.getElementById('specialization-error').style.display = 'none';
+        document.getElementById('custom_city').style.display = 'none';
         formTitle.textContent = 'Adaugă Fotograf Nou';
         deleteBtn.style.display = 'none';
         
         // Reset specializări
         const specializationCheckboxes = document.querySelectorAll('input[name="specialization[]"]');
         specializationCheckboxes.forEach(checkbox => checkbox.checked = false);
+        
+        // Reinițializăm lista de orașe
+        updateCityList();
     }
     
     // Toggle formular
@@ -777,7 +1215,7 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', function() {
             const photographerId = this.getAttribute('data-id');
             
-            // Resetăm formul și schimbăm acțiunea
+            // Resetăm formularul și schimbăm acțiunea
             resetForm();
             document.getElementById('photographer-action').value = 'edit';
             document.getElementById('photographer-id').value = photographerId;
@@ -795,8 +1233,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         document.getElementById('name').value = photographer.name || '';
                         document.getElementById('slug').value = photographer.slug || '';
                         document.getElementById('bio').value = photographer.bio || '';
-                        document.getElementById('country').value = photographer.country || '';
-                        document.getElementById('city').value = photographer.city || '';
                         document.getElementById('email').value = photographer.email || '';
                         document.getElementById('phone').value = photographer.phone || '';
                         document.getElementById('website').value = photographer.website || '';
@@ -806,11 +1242,40 @@ document.addEventListener('DOMContentLoaded', function() {
                         document.getElementById('is_featured').checked = photographer.is_featured == 1;
                         document.getElementById('is_active').checked = photographer.is_active == 1;
                         
+                        // Setăm țara și apoi selectăm orașul corespunzător
+                        const countrySelect = document.getElementById('country');
+                        countrySelect.value = photographer.country || '';
+                        updateCityList();
+                        
+                        // Recunoaște orașul din listă sau marchează ca personalizat
+                        const citySelect = document.getElementById('city');
+                        const customCityInput = document.getElementById('custom_city');
+                        const selectedCities = citiesByCountry[photographer.country] || {};
+                        
+                        // Verificăm dacă orașul este în lista standard sau trebuie adăugat ca personalizat
+                        let isStandardCity = false;
+                        for (const [cityValue, cityName] of Object.entries(selectedCities)) {
+                            if (cityValue === photographer.city || cityName === photographer.city) {
+                                citySelect.value = cityValue;
+                                isStandardCity = true;
+                                break;
+                            }
+                        }
+                        
+                        if (!isStandardCity && photographer.city) {
+                            citySelect.value = 'Alta-localitate';
+                            customCityInput.value = photographer.city;
+                            customCityInput.style.display = 'block';
+                        }
+                        
                         // Salvăm calea imaginii existente
                         if (photographer.profile_image) {
                             document.getElementById('existing-profile-image').value = photographer.profile_image;
                             document.getElementById('profile-image-preview-img').src = photographer.profile_image;
                             document.getElementById('profile-image-preview').style.display = 'block';
+                            
+                            // Eliminăm atributul "required" pentru imagine profilului dacă există deja o imagine
+                            document.getElementById('profile_image').removeAttribute('required');
                         }
                         
                         // Setăm specializările selectate

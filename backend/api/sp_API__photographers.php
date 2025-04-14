@@ -118,9 +118,25 @@ try {
             break;
             
         case 'add':
-            // Verifică dacă numele este furnizat
-            if (!isset($_POST['name']) || empty($_POST['name'])) {
-                throw new Exception('Numele fotografului este obligatoriu.');
+            // Verifică toate câmpurile obligatorii
+            $requiredFields = [
+                'name' => 'Numele fotografului', 
+                'country' => 'Țara', 
+                'city' => 'Orașul',
+                'profile_image' => 'Imaginea de profil',
+                'email' => 'Email-ul',
+                'phone' => 'Telefonul'
+            ];
+            
+            foreach ($requiredFields as $field => $fieldName) {
+                if (!isset($_POST[$field]) || empty($_POST[$field])) {
+                    throw new Exception($fieldName . ' este obligatoriu.');
+                }
+            }
+            
+            // Verifică dacă există cel puțin o specializare
+            if (!isset($_POST['specializations']) || !is_array($_POST['specializations']) || count($_POST['specializations']) === 0) {
+                throw new Exception('Selectați cel puțin o specializare pentru fotograf.');
             }
             
             $name = trim($_POST['name']);
@@ -154,11 +170,11 @@ try {
                 $name,
                 $slug,
                 $_POST['bio'] ?? null,
-                $_POST['country'] ?? null,
-                $_POST['city'] ?? null,
-                $_POST['profile_image'] ?? null,
-                $_POST['email'] ?? null,
-                $_POST['phone'] ?? null,
+                $_POST['country'],
+                $_POST['city'],
+                $_POST['profile_image'],
+                $_POST['email'],
+                $_POST['phone'],
                 $_POST['website'] ?? null,
                 $_POST['facebook'] ?? null,
                 $_POST['instagram'] ?? null,
@@ -205,9 +221,25 @@ try {
                 throw new Exception('Fotograful nu a fost găsit.');
             }
             
-            // Verifică dacă numele este furnizat
-            if (!isset($_POST['name']) || empty($_POST['name'])) {
-                throw new Exception('Numele fotografului este obligatoriu.');
+            // Verifică toate câmpurile obligatorii
+            $requiredFields = [
+                'name' => 'Numele fotografului', 
+                'country' => 'Țara', 
+                'city' => 'Orașul',
+                'profile_image' => 'Imaginea de profil',
+                'email' => 'Email-ul',
+                'phone' => 'Telefonul'
+            ];
+            
+            foreach ($requiredFields as $field => $fieldName) {
+                if (!isset($_POST[$field]) || empty($_POST[$field])) {
+                    throw new Exception($fieldName . ' este obligatoriu.');
+                }
+            }
+            
+            // Verifică dacă există cel puțin o specializare
+            if (!isset($_POST['specializations']) || !is_array($_POST['specializations']) || count($_POST['specializations']) === 0) {
+                throw new Exception('Selectați cel puțin o specializare pentru fotograf.');
             }
             
             $name = trim($_POST['name']);
@@ -251,11 +283,11 @@ try {
                 $name,
                 $slug,
                 $_POST['bio'] ?? null,
-                $_POST['country'] ?? null,
-                $_POST['city'] ?? null,
-                $_POST['profile_image'] ?? null,
-                $_POST['email'] ?? null,
-                $_POST['phone'] ?? null,
+                $_POST['country'],
+                $_POST['city'],
+                $_POST['profile_image'],
+                $_POST['email'],
+                $_POST['phone'],
                 $_POST['website'] ?? null,
                 $_POST['facebook'] ?? null,
                 $_POST['instagram'] ?? null,
